@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"errors"
 	"io/ioutil"
-	"log"
 	"os"
 	"strconv"
 )
@@ -42,14 +41,12 @@ func WritePid(pid int, path string) error {
 
 	s := strconv.Itoa(pid)
 
-	t, err := f.WriteString(s)
-	if err != nil {
-		return err
+	_, er := f.WriteString(s)
+	if er != nil {
+		return er
 	}
 
 	f.Sync()
-
-	log.Printf("Saved %d to %s", t, path)
 
 	return nil
 }
